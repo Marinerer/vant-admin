@@ -34,7 +34,8 @@
 - **日期处理**: [dayjs](https://day.js.org/) - 轻量级日期库（已配置中文）
 
 ### 开发工具
-- **代码检查**: [ESLint 10](https://eslint.org/) + TypeScript-ESLint
+- **代码检查**: [ESLint 10](https://eslint.org/) + TypeScript-ESLint（类型感知）+ React-X / React-DOM 插件
+- **代码格式化**: [Prettier 3](https://prettier.io/) - 保存时自动格式化（需安装 VS Code 扩展 `esbenp.prettier-vscode`）
 - **单元测试**: [Vitest 4](https://vitest.dev/) + [React Testing Library](https://testing-library.com/)
 - **E2E 测试**: [Playwright](https://playwright.dev/) - 端到端测试
 - **包管理**: [pnpm 10](https://pnpm.io/) - 高效的包管理器
@@ -74,8 +75,11 @@ nest-cms-admin/
 │   └── main.tsx            # 应用入口
 ├── e2e/                    # E2E 测试
 │   └── dashboard.spec.ts   # 端到端测试用例
+├── .vscode/                # VS Code 工作区配置
+│   └── settings.json       # 保存时自动格式化配置
 ├── .gitignore
-├── eslint.config.js        # ESLint 配置
+├── .prettierrc             # Prettier 格式化规则
+├── eslint.config.js        # ESLint 配置（类型感知 + React 插件）
 ├── index.html              # HTML 入口
 ├── package.json
 ├── playwright.config.ts    # Playwright 配置
@@ -336,7 +340,8 @@ const columns: ProColumns<DataType>[] = [
 ### 5. 开发工具集成
 
 - ✅ React Compiler 性能优化
-- ✅ ESLint 代码检查
+- ✅ ESLint 代码检查（类型感知 + React-X / React-DOM 插件）
+- ✅ Prettier 代码格式化（保存时自动格式化）
 - ✅ TypeScript 类型安全
 - ✅ 热模块替换（HMR）
 
@@ -566,9 +571,32 @@ pnpm dev
 ### 代码风格
 
 - 使用 TypeScript 严格模式
-- 遵循 ESLint 规则
+- 遵循 ESLint 规则（含类型感知检查）
 - 组件使用函数式声明
 - 使用 ES Module 导入导出
+
+### 代码格式化
+
+保存文件时 VS Code 会自动运行 Prettier 格式化（已配置 `.vscode/settings.json`）。
+
+> **前提**：需安装 VS Code 扩展 [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)（`esbenp.prettier-vscode`）
+
+```bash
+# 手动检查 ESLint
+pnpm lint
+
+# 自动修复 ESLint 问题
+pnpm lint:fix
+
+# 手动格式化所有源码
+pnpm format
+```
+
+**Prettier 主要规则**（见 `.prettierrc`）：
+- 无分号（`semi: false`）
+- 单引号（`singleQuote: true`）
+- 尾逗号（`trailingComma: all`）
+- 行宽 100 字符（`printWidth: 100`）
 
 ### 命名规范
 

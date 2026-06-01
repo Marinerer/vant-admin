@@ -1,11 +1,11 @@
-import { Card, Typography, Space, Tag, Button } from 'antd';
-import { CheckCircleOutlined, WarningOutlined } from '@ant-design/icons';
-import { useAppStore } from '../stores/useAppStore';
+import { Card, Typography, Space, Tag, Button } from 'antd'
+import { CheckCircleOutlined, WarningOutlined } from '@ant-design/icons'
+import { useAppStore } from '../stores/useAppStore'
 
-const { Title, Paragraph, Text } = Typography;
+const { Title, Paragraph, Text } = Typography
 
 export default function Dashboard() {
-  const user = useAppStore((state) => state.user);
+  const user = useAppStore((state) => state.user)
 
   return (
     <div className="p-6">
@@ -25,8 +25,8 @@ export default function Dashboard() {
           { title: '活跃用户', value: '892', icon: <CheckCircleOutlined />, color: 'green' },
           { title: '待处理', value: '56', icon: <WarningOutlined />, color: 'orange' },
           { title: '完成率', value: '98.5%', icon: <CheckCircleOutlined />, color: 'purple' },
-        ].map((stat, index) => (
-          <Card key={index} hoverable className="shadow-sm">
+        ].map((stat) => (
+          <Card key={stat.title} hoverable className="shadow-sm">
             <div className="flex items-center justify-between">
               <div>
                 <Text className="text-gray-500 text-sm">{stat.title}</Text>
@@ -52,5 +52,5 @@ export default function Dashboard() {
         </Space>
       </Card>
     </div>
-  );
+  )
 }

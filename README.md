@@ -6,6 +6,7 @@
 
 - [技术栈](#技术栈)
 - [项目结构](#项目结构)
+- [开发脚本](#-开发脚本)
 - [快速开始](#快速开始)
 - [开发指南](#开发指南)
 - [核心功能](#核心功能)
@@ -15,30 +16,12 @@
 
 ## 🛠 技术栈
 
-### 核心框架
-- **构建工具**: [Vite 8](https://vite.dev/) - 极速的前端构建工具
-- **前端框架**: [React 19](https://react.dev/) - 最新版本，支持 React Compiler
-- **TypeScript**: ~6.0.2 - 类型安全的 JavaScript 超集
-
-### UI 与样式
-- **UI 组件库**: [Ant Design 6](https://ant.design/) - 企业级 UI 设计语言
-- **Pro Components**: [@ant-design/pro-components](https://procomponents.ant.design/) - 高级组件库
-- **图标库**: [@ant-design/icons](https://ant.design/components/icon-cn/) - 图标组件
-- **CSS 框架**: [Tailwind CSS 4](https://tailwindcss.com/) - 原子化 CSS 框架
-- **样式兼容**: 完整的 Ant Design 与 Tailwind CSS 集成方案
-
-### 状态与数据
-- **状态管理**: [Zustand 5](https://zustand-demo.pmnd.rs/) - 轻量级状态管理
-- **数据请求**: [React Query 5](https://tanstack.com/query/latest) - 强大的异步状态管理
-- **路由管理**: [React Router 6](https://reactrouter.com/) - 声明式路由
-- **日期处理**: [dayjs](https://day.js.org/) - 轻量级日期库（已配置中文）
-
-### 开发工具
-- **代码检查**: [ESLint 10](https://eslint.org/) + TypeScript-ESLint（类型感知）+ React-X / React-DOM 插件
-- **代码格式化**: [Prettier 3](https://prettier.io/) - 保存时自动格式化（需安装 VS Code 扩展 `esbenp.prettier-vscode`）
-- **单元测试**: [Vitest 4](https://vitest.dev/) + [React Testing Library](https://testing-library.com/)
-- **E2E 测试**: [Playwright](https://playwright.dev/) - 端到端测试
-- **包管理**: [pnpm 10](https://pnpm.io/) - 高效的包管理器
+| 分类       | 技术                                                 |
+| ---------- | ---------------------------------------------------- |
+| 核心框架   | Vite 8、React 19、TypeScript ~6.0                    |
+| UI 与样式  | Ant Design 6、Pro Components、Tailwind CSS 4         |
+| 状态与数据 | Zustand 5、React Query 5、React Router 6、dayjs      |
+| 开发工具   | ESLint 10、Prettier 3、Vitest 4、Playwright、pnpm 10 |
 
 ## 📁 项目结构
 
@@ -87,6 +70,22 @@ nest-cms-admin/
 ├── vite.config.ts          # Vite 配置
 └── vitest.config.ts        # Vitest 配置
 ```
+
+## 📜 开发脚本
+
+| 脚本                 | 说明                                    |
+| -------------------- | --------------------------------------- |
+| `pnpm dev`           | 启动开发服务器（http://localhost:5173） |
+| `pnpm build`         | TypeScript 类型检查 + 生产构建          |
+| `pnpm preview`       | 预览生产构建产物                        |
+| `pnpm lint`          | 运行 ESLint 代码检查                    |
+| `pnpm lint:fix`      | 自动修复 ESLint 可修复的问题            |
+| `pnpm format`        | 使用 Prettier 格式化所有源码文件        |
+| `pnpm test`          | 运行单元测试（Vitest）                  |
+| `pnpm test:ui`       | 启动 Vitest UI 界面                     |
+| `pnpm test:coverage` | 生成测试覆盖率报告                      |
+| `pnpm test:e2e`      | 运行 E2E 测试（Playwright）             |
+| `pnpm test:e2e:ui`   | 启动 Playwright UI 界面                 |
 
 ## 🚀 快速开始
 

@@ -1,4 +1,11 @@
 {
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "tsconfig.json": "tsconfig.*.json, env.d.ts, *.d.ts",
+    "vite.config.*": "jsconfig*, vitest.config.*, uno.config.*, cypress.config.*, playwright.config.*",
+    "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .node-version, .eslint*, eslint*, .prettier*, prettier*, .editorconfig, .npmrc, .git*, *.sh, *.prompt",
+    ".env": ".env.*"
+  },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {

@@ -1,4 +1,5 @@
 import { ProLayout } from '@ant-design/pro-components';
+import { HomeOutlined, SettingOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useAppStore } from '../stores/useAppStore';
 
@@ -15,8 +16,9 @@ export default function MainLayout() {
       route={{
         path: '/',
         routes: [
-          { path: '/', name: 'Dashboard', icon: 'HomeOutlined' },
-          { path: '/settings', name: 'Settings', icon: 'SettingOutlined' },
+          { path: '/', name: 'Dashboard', icon: <HomeOutlined /> },
+          { path: '/users', name: '用户管理', icon: <UserOutlined /> },
+          { path: '/settings', name: '系统设置', icon: <SettingOutlined /> },
         ],
       }}
       avatarProps={{
@@ -34,8 +36,9 @@ export default function MainLayout() {
         </div>
       )}
       actionsRender={() => [
-        <a key="logout" onClick={logout}>
-          Logout
+        <a key="logout" onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <LogoutOutlined />
+          退出登录
         </a>,
       ]}
     >

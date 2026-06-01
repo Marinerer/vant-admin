@@ -1,2 +1,37 @@
 @import "tailwindcss";
 @source "../";
+
+/* 防止 Tailwind 重置 Ant Design 样式 */
+@layer base {
+  /* 保留 Ant Design 的按钮样式 */
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    all: unset;
+  }
+
+  /* 防止 Tailwind 影响 Ant Design 表单元素 */
+  input, textarea, select {
+    all: revert;
+  }
+}
+
+/* Ant Design Pro 组件样式优化 */
+@layer components {
+  .ant-pro-layout {
+    min-height: 100vh;
+  }
+
+  /* 确保 Tailwind 工具类可以与 Ant Design 协同工作 */
+  .ant-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* 全局样式重置 - 仅针对非 Ant Design 元素 */
+@layer utilities {
+  *:not([class^="ant-"]):not([class*=" ant-"]) {
+    box-sizing: border-box;
+  }
+}

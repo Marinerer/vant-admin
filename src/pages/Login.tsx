@@ -52,7 +52,7 @@ export default function Login() {
             <UserOutlined className="text-2xl text-white" />
           </div>
           <Title level={2} className="!mb-2 !text-gray-800">
-            Nest CMS Admin
+            Vant Admin
           </Title>
           <Text className="text-gray-500">现代化内容管理系统后台</Text>
         </div>
@@ -220,7 +220,7 @@ export default function Login() {
 
         {/* 底部版权信息 */}
         <div className="text-center mt-6 text-sm text-gray-500">
-          <Text>© 2024 Nest CMS Admin. All rights reserved.</Text>
+          <Text>© 2024 Vant Admin. All rights reserved.</Text>
         </div>
       </div>
     </div>

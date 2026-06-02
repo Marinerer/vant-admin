@@ -1,5 +1,5 @@
 {
-  "name": "nest-admin",
+  "name": "vant-admin",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -14,7 +14,8 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "test:e2e": "playwright test",
-    "test:e2e:ui": "playwright test --ui"
+    "test:e2e:ui": "playwright test --ui",
+    "prepare": "husky"
   },
   "dependencies": {
     "@ant-design/icons": "^6.2.5",
@@ -31,6 +32,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
+    "@commitlint/cli": "^21.0.2",
+    "@commitlint/config-conventional": "^21.0.2",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.60.0",
     "@rolldown/plugin-babel": "^0.2.3",
@@ -52,13 +55,24 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "eslint-plugin-react-x": "^5.8.9",
     "globals": "^17.6.0",
+    "husky": "^9.1.7",
     "jsdom": "^29.1.1",
+    "lint-staged": "^17.0.7",
     "prettier": "^3.8.3",
     "tailwindcss": "^4.3.0",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",
     "vite": "^8.0.12",
     "vitest": "^4.1.8"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,json}": [
+      "prettier --write"
+    ]
   },
   "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319"
 }

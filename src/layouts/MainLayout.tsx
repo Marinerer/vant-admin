@@ -1,17 +1,17 @@
-import { ProLayout } from '@ant-design/pro-components';
-import { HomeOutlined, SettingOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { useAppStore } from '../stores/useAppStore';
+import { ProLayout } from '@ant-design/pro-components'
+import { HomeOutlined, SettingOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
+import { useAppStore } from '../stores/useAppStore'
 
 export default function MainLayout() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const user = useAppStore((state) => state.user);
-  const logout = useAppStore((state) => state.logout);
+  const navigate = useNavigate()
+  const location = useLocation()
+  const user = useAppStore((state) => state.user)
+  const logout = useAppStore((state) => state.logout)
 
   return (
     <ProLayout
-      title="Nest CMS Admin"
+      title="Vant Admin"
       location={location}
       route={{
         path: '/',
@@ -29,7 +29,7 @@ export default function MainLayout() {
       menuItemRender={(item, dom) => (
         <div
           onClick={() => {
-            if (item.path) navigate(item.path);
+            if (item.path) navigate(item.path)
           }}
         >
           {dom}
@@ -44,5 +44,5 @@ export default function MainLayout() {
     >
       <Outlet />
     </ProLayout>
-  );
+  )
 }

@@ -1,6 +1,8 @@
-# Nest CMS Admin
+# vant-admin
 
-基于 React 19 + Vite 8 的现代化管理后台系统，集成 Ant Design 6、Pro Components、Tailwind CSS 4、Zustand 状态管理和 React Query 数据请求。
+> Vite + ant design + admin
+
+基于 React 19 + Vite 8 + Ant Design 6 的现代化管理后台系统模板，集成 Pro Components、Tailwind CSS 4、Zustand 状态管理和 React Query 数据请求。
 
 ## 📋 目录
 
@@ -26,7 +28,7 @@
 ## 📁 项目结构
 
 ```
-nest-cms-admin/
+vant-admin/
 ├── public/                  # 静态资源
 │   ├── favicon.svg
 │   └── icons.svg
@@ -100,7 +102,7 @@ nest-cms-admin/
 ```bash
 # 克隆项目
 git clone <repository-url>
-cd nest-cms-admin
+cd vant-admin
 
 # 安装依赖（使用 pnpm）
 pnpm install
@@ -642,5 +644,5 @@ MIT License
 
 ---
 
-**开发团队**: Nest CMS Team  
+**开发团队**: vant-admin Team  
 **最后更新**: 2026-06-01

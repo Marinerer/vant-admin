@@ -8,6 +8,7 @@
  */
 
 export * as storage from './storage'
+export * from './token'
 export * from './format'
 export * from './validate'
 export * from './request'

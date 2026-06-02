@@ -3,7 +3,7 @@
  * 支持 localStorage / sessionStorage，支持过期时间
  */
 
-const STORAGE_PREFIX = 'nest_cms_'
+const STORAGE_PREFIX = 'vant_'
 
 /** 生成带前缀的 key */
 function prefixKey(key: string): string {

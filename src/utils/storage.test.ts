@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { set, get, remove, clearAll, setSession, getSession, removeSession } from './storage'
 
-const PREFIX = 'nest_cms_'
+const PREFIX = 'vant_'
 
 beforeEach(() => {
   localStorage.clear()

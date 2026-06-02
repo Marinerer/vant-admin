@@ -3,6 +3,7 @@ import { Button, Form, Input, Card, Typography, Checkbox, message, Spin } from '
 import { UserOutlined, LockOutlined, MailOutlined, MobileOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { useAppStore } from '../stores/useAppStore'
+import { setToken, setRefreshToken } from '../utils/token'
 
 const { Title, Text } = Typography
 
@@ -27,7 +28,14 @@ export default function Login() {
       // 模拟登录请求延迟
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
-      // Mock login
+      // Mock 登录响应数据
+      const mockAccessToken = 'mock_access_token_' + Date.now()
+      const mockRefreshToken = 'mock_refresh_token_' + Date.now()
+
+      // 存储 token
+      setToken(mockAccessToken)
+      setRefreshToken(mockRefreshToken)
+
       setUser({
         id: '1',
         name: values.username ?? values.phone ?? '',

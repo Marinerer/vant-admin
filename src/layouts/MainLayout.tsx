@@ -2,6 +2,7 @@ import { ProLayout } from '@ant-design/pro-components'
 import { HomeOutlined, SettingOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useAppStore } from '../stores/useAppStore'
+import { clearTokens } from '../utils/token'
 
 export default function MainLayout() {
   const navigate = useNavigate()
@@ -39,6 +40,7 @@ export default function MainLayout() {
         <a
           key="logout"
           onClick={() => {
+            clearTokens()
             logout()
             navigate('/login')
           }}

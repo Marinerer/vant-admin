@@ -6,7 +6,7 @@
 import axios, { AxiosError } from 'axios'
 import type { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import { message } from 'antd'
-import * as storage from './storage'
+import { getToken, removeToken } from './token'
 
 // ============ 类型定义 ============
 
@@ -53,7 +53,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config: InternalAxiosRequestConfig & { skipAuth?: boolean }) => {
     if (!config.skipAuth) {
-      const token = storage.get<string>('token')
+      const token = getToken()
       if (token) {
         config.headers.set('Authorization', `Bearer ${token}`)
       }
@@ -101,7 +101,7 @@ instance.interceptors.response.use(
 
         // 401 自动跳转登录
         if (status === 401) {
-          storage.remove('token')
+          removeToken()
           window.location.href = '/login'
         }
       } else {

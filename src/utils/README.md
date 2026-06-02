@@ -22,7 +22,7 @@ src/types/
 
 ## storage — 本地存储
 
-带 `nest_cms_` 前缀隔离，支持过期时间。
+带 `vant_` 前缀隔离，支持过期时间。
 
 ```ts
 import * as storage from '@/utils/storage'

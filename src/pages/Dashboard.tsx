@@ -1,11 +1,13 @@
 import { Card, Typography, Space, Tag, Button } from 'antd'
 import { CheckCircleOutlined, WarningOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 import { useAppStore } from '../stores/useAppStore'
 
 const { Title, Paragraph, Text } = Typography
 
 export default function Dashboard() {
   const user = useAppStore((state) => state.user)
+  const navigate = useNavigate()
 
   return (
     <div className="p-6">
@@ -45,10 +47,12 @@ export default function Dashboard() {
       {/* 快捷操作 */}
       <Card title="快捷操作" className="shadow-sm">
         <Space wrap>
-          <Button type="primary">新建内容</Button>
-          <Button>用户管理</Button>
-          <Button>系统设置</Button>
-          <Button>查看报表</Button>
+          <Button type="primary" onClick={() => navigate('/users')}>
+            新建内容
+          </Button>
+          <Button onClick={() => navigate('/users')}>用户管理</Button>
+          <Button onClick={() => navigate('/settings')}>系统设置</Button>
+          <Button onClick={() => navigate('/')}>查看报表</Button>
         </Space>
       </Card>
     </div>

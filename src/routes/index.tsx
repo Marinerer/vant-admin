@@ -1,8 +1,9 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
-import MainLayout from '../layouts/MainLayout';
-import Login from '../pages/Login';
-import Dashboard from '../pages/Dashboard';
-import Users from '../pages/Users';
+import { createBrowserRouter } from 'react-router-dom'
+import MainLayout from '../layouts/MainLayout'
+import Login from '../pages/Login'
+import Dashboard from '../pages/Dashboard'
+import Users from '../pages/Users'
+import { ForbiddenPage, NotFoundPage, ServerErrorPage } from '../pages/ErrorPages'
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +20,15 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '*',
-    element: <Navigate to="/" replace />,
+    path: '/403',
+    element: <ForbiddenPage />,
   },
-]);
+  {
+    path: '/500',
+    element: <ServerErrorPage />,
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
+  },
+])

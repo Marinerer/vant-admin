@@ -1,0 +1,156 @@
+/* ===== 防止 Tailwind 重置 Ant Design 样式 ===== */
+@layer base {
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    all: unset;
+  }
+
+  input,
+  textarea,
+  select {
+    all: revert;
+  }
+}
+
+/* ===== 组合组件类 ===== */
+@layer components {
+  /* ---------- 页面布局 ---------- */
+  .page-container {
+    @apply p-6 animate-fade-in;
+  }
+
+  .page-header {
+    @apply mb-6 flex items-center justify-between;
+  }
+
+  /* ---------- Flex 快捷类 ---------- */
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+
+  .flex-col-center {
+    @apply flex flex-col items-center justify-center;
+  }
+
+  /* ---------- 卡片 ---------- */
+  .card-base {
+    @apply rounded-[var(--radius-card)] shadow-[var(--shadow-card)] border-0;
+  }
+
+  .card-hoverable {
+    @apply rounded-[var(--radius-card)] shadow-[var(--shadow-card)] border-0 transition-shadow duration-300 hover:shadow-[var(--shadow-card-hover)];
+  }
+
+  /* ---------- 统计卡片 ---------- */
+  .stat-card {
+    @apply rounded-[var(--radius-card)] shadow-[var(--shadow-card)] border-0 transition-shadow duration-300 hover:shadow-[var(--shadow-card-hover)] p-5;
+  }
+
+  .stat-card-value {
+    @apply text-2xl font-semibold text-gray-800;
+  }
+
+  .stat-card-label {
+    @apply text-sm text-gray-500;
+  }
+
+  /* ---------- 表格 ---------- */
+  .table-wrapper {
+    @apply rounded-[var(--radius-card)] shadow-[var(--shadow-card)] border-0 overflow-x-auto;
+  }
+
+  /* ---------- 表单 / 搜索 ---------- */
+  .form-section {
+    @apply space-y-5;
+  }
+
+  .form-actions {
+    @apply flex items-center gap-3 pt-4;
+  }
+
+  .search-bar {
+    @apply flex items-center gap-3 mb-4 p-4 bg-gray-50 rounded-[var(--radius-card)];
+  }
+
+  /* ---------- 登录页 ---------- */
+  .login-page {
+    @apply flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50;
+  }
+
+  .login-card {
+    @apply w-full max-w-md px-4;
+  }
+
+  .login-logo {
+    @apply inline-flex items-center justify-center w-16 h-16 mb-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full;
+  }
+
+  /* ---------- 徽标 / 状态标签 ---------- */
+  .badge-dot {
+    @apply inline-block w-2 h-2 rounded-full;
+  }
+
+  .status-active {
+    @apply text-green-600 bg-green-50 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .status-inactive {
+    @apply text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .status-pending {
+    @apply text-yellow-600 bg-yellow-50 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .status-error {
+    @apply text-red-600 bg-red-50 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  /* ---------- 文本截断 ---------- */
+  .text-ellipsis-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .text-ellipsis-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* ---------- 其他 ---------- */
+  .divider-vertical {
+    @apply inline-block h-4 w-px bg-gray-300 mx-2 align-middle;
+  }
+
+  .scroll-area {
+    @apply overflow-auto;
+    scrollbar-width: thin;
+  }
+
+  /* ---------- Ant Design Pro ---------- */
+  .ant-pro-layout {
+    min-height: 100vh;
+  }
+
+  .ant-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ===== 自定义工具类 ===== */
+@layer utilities {
+  /* Ant Design 元素不受全局重置影响 */
+  *:not([class^='ant-']):not([class*=' ant-']) {
+    box-sizing: border-box;
+  }
+}

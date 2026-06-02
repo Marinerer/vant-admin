@@ -65,7 +65,7 @@ export default function Login() {
           {/* 登录方式切换 */}
           <div className="flex mb-6 border-b border-gray-200">
             <button
-              className={`flex-1 pb-3 text-center font-medium transition-colors ${
+              className={`flex-1 pb-3 text-center font-medium transition-colors cursor-pointer ${
                 loginType === 'account'
                   ? 'text-blue-500 border-b-2 border-blue-500'
                   : 'text-gray-500 hover:text-gray-700'
@@ -75,7 +75,7 @@ export default function Login() {
               账号密码登录
             </button>
             <button
-              className={`flex-1 pb-3 text-center font-medium transition-colors ${
+              className={`flex-1 pb-3 text-center font-medium transition-colors cursor-pointer ${
                 loginType === 'phone'
                   ? 'text-blue-500 border-b-2 border-blue-500'
                   : 'text-gray-500 hover:text-gray-700'
@@ -87,7 +87,7 @@ export default function Login() {
           </div>
 
           <Spin spinning={loading}>
-            <div className="h-[280px]">
+            <div className="h-[240px]">
               {loginType === 'account' ? (
                 <Form<LoginFormValues>
                   layout="vertical"
@@ -163,8 +163,8 @@ export default function Login() {
                       prefix={<MailOutlined className="text-gray-400" />}
                       placeholder="请输入验证码"
                       className="rounded-lg"
-                      addonAfter={
-                        <Button type="link" className="!px-2">
+                      suffix={
+                        <Button type="link" size="small" className="!px-2">
                           获取验证码
                         </Button>
                       }

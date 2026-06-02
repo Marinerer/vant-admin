@@ -36,9 +36,16 @@ export default function MainLayout() {
         </div>
       )}
       actionsRender={() => [
-        <a key="logout" onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+        <a
+          key="logout"
+          onClick={() => {
+            logout()
+            navigate('/login')
+          }}
+          style={{ display: 'flex', alignItems: 'center', gap: 4 }}
+        >
           <LogoutOutlined />
-          退出登录
+          退出
         </a>,
       ]}
     >

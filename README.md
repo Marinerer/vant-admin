@@ -272,14 +272,14 @@ server.use(
 
 ## 📚 文档索引
 
-| 文档                                              | 说明                                       |
-| ------------------------------------------------- | ------------------------------------------ |
-| [核心功能](./docs/core-features.md)               | 认证系统、布局、主题、示例页面、MSW Mock   |
-| [Ant Design 样式指南](./docs/antd-style-guide.md) | Tailwind + AntD 共存方案、样式修复与覆盖   |
-| [测试指南](./docs/testing.md)                     | 单元测试（Vitest）、E2E 测试（Playwright） |
-| [构建部署](./docs/deployment.md)                  | 生产构建、Vercel / Nginx / Docker 部署     |
-| [常见问题](./docs/faq.md)                         | 样式冲突、Pro Components 兼容、MSW 调试等  |
-| [开发规范](./docs/dev-standards.md)               | 代码风格、格式化、命名规范、Git 提交规范   |
+| 文档                                                    | 说明                                       |
+| ------------------------------------------------------- | ------------------------------------------ |
+| [核心功能](./docs/guide/core-features.md)               | 认证系统、布局、主题、示例页面、MSW Mock   |
+| [Ant Design 样式指南](./docs/guide/antd-style-guide.md) | Tailwind + AntD 共存方案、样式修复与覆盖   |
+| [测试指南](./docs/guide/testing.md)                     | 单元测试（Vitest）、E2E 测试（Playwright） |
+| [构建部署](./docs/guide/deployment.md)                  | 生产构建、Vercel / Nginx / Docker 部署     |
+| [常见问题](./docs/guide/faq.md)                         | 样式冲突、Pro Components 兼容、MSW 调试等  |
+| [开发规范](./docs/guide/dev-standards.md)               | 代码风格、格式化、命名规范、Git 提交规范   |
 
 ## 🔗 相关链接
 

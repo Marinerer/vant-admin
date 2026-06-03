@@ -46,7 +46,6 @@
     "@types/node": "^24.12.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/devtools": "^0.1.24",
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/ui": "^4.1.8",
     "babel-plugin-react-compiler": "^1.0.0",
@@ -60,6 +59,7 @@
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
     "lint-staged": "^17.0.7",
+    "msw": "^2.14.6",
     "prettier": "^3.8.3",
     "rollup-plugin-visualizer": "^7.0.1",
     "tailwindcss": "^4.3.0",
@@ -77,5 +77,15 @@
       "prettier --write"
     ]
   },
-  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319"
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "msw"
+    ]
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  },
+  "packageManager": "pnpm@10.33.0"
 }

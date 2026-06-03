@@ -1,13 +1,66 @@
-import { Card, Typography, Space, Tag, Button } from 'antd'
+import { Card, Typography, Space, Tag, Button, Spin, Empty } from 'antd'
 import { CheckCircleOutlined, WarningOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
 import { useAppStore } from '../stores/useAppStore'
+import { get } from '../utils/request'
 
 const { Title, Paragraph, Text } = Typography
+
+interface DashboardStats {
+  totalUsers: number
+  activeUsers: number
+  pendingTasks: number
+  completionRate: number
+}
 
 export default function Dashboard() {
   const user = useAppStore((state) => state.user)
   const navigate = useNavigate()
+
+  const { data: stats, isLoading } = useQuery({
+    queryKey: ['dashboardStats'],
+    queryFn: () => get<DashboardStats>('/dashboard/stats'),
+  })
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <Spin size="large" />
+      </div>
+    )
+  }
+
+  if (!stats) {
+    return <Empty description="暂无数据" className="mt-20" />
+  }
+
+  const statCards = [
+    {
+      title: '总用户数',
+      value: stats.totalUsers.toLocaleString(),
+      icon: <CheckCircleOutlined />,
+      color: 'blue',
+    },
+    {
+      title: '活跃用户',
+      value: stats.activeUsers.toLocaleString(),
+      icon: <CheckCircleOutlined />,
+      color: 'green',
+    },
+    {
+      title: '待处理',
+      value: String(stats.pendingTasks),
+      icon: <WarningOutlined />,
+      color: 'orange',
+    },
+    {
+      title: '完成率',
+      value: `${stats.completionRate}%`,
+      icon: <CheckCircleOutlined />,
+      color: 'purple',
+    },
+  ]
 
   return (
     <div className="p-6">
@@ -22,12 +75,7 @@ export default function Dashboard() {
 
       {/* 统计卡片 */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        {[
-          { title: '总用户数', value: '1,234', icon: <CheckCircleOutlined />, color: 'blue' },
-          { title: '活跃用户', value: '892', icon: <CheckCircleOutlined />, color: 'green' },
-          { title: '待处理', value: '56', icon: <WarningOutlined />, color: 'orange' },
-          { title: '完成率', value: '98.5%', icon: <CheckCircleOutlined />, color: 'purple' },
-        ].map((stat) => (
+        {statCards.map((stat) => (
           <Card key={stat.title} hoverable className="shadow-sm">
             <div className="flex items-center justify-between">
               <div>

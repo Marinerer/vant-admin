@@ -4,6 +4,7 @@ import { UserOutlined, LockOutlined, MailOutlined, MobileOutlined } from '@ant-d
 import { useNavigate } from 'react-router-dom'
 import { useAppStore } from '../stores/useAppStore'
 import { setToken, setRefreshToken } from '../utils/token'
+import { post } from '../utils/request'
 
 const { Title, Text } = Typography
 
@@ -13,6 +14,17 @@ interface LoginFormValues {
   phone?: string
   code?: string
   remember?: boolean
+}
+
+interface LoginResponse {
+  accessToken: string
+  refreshToken: string
+  user: {
+    id: string
+    name: string
+    avatar: string
+    role: string
+  }
 }
 
 export default function Login() {
@@ -25,21 +37,22 @@ export default function Login() {
     setLoading(true)
 
     try {
-      // 模拟登录请求延迟
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      // 根据登录方式分发请求体
+      const payload =
+        loginType === 'account'
+          ? { username: values.username, password: values.password }
+          : { phone: values.phone, code: values.code }
 
-      // Mock 登录响应数据
-      const mockAccessToken = 'mock_access_token_' + Date.now()
-      const mockRefreshToken = 'mock_refresh_token_' + Date.now()
+      const res = await post<LoginResponse>('/auth/login', payload)
 
       // 存储 token
-      setToken(mockAccessToken)
-      setRefreshToken(mockRefreshToken)
+      setToken(res.accessToken)
+      setRefreshToken(res.refreshToken)
 
       setUser({
-        id: '1',
-        name: values.username ?? values.phone ?? '',
-        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Felix',
+        id: res.user.id,
+        name: res.user.name,
+        avatar: res.user.avatar,
       })
 
       message.success('登录成功！')

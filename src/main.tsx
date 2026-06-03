@@ -7,12 +7,22 @@ import { queryClient } from './services/queryClient'
 import { router } from './routes'
 import './styles/index.css'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <AntdProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </AntdProvider>
-  </StrictMode>,
-)
+async function bootstrap() {
+  // 开发环境启用 MSW mock
+  if (import.meta.env.DEV) {
+    const { startMockWorker } = await import('./mocks/browser')
+    await startMockWorker()
+  }
+
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <AntdProvider>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </AntdProvider>
+    </StrictMode>,
+  )
+}
+
+void bootstrap()

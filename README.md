@@ -1,76 +1,56 @@
 # vant-admin
 
-> Vite + ant design + admin
+> Vite + React + Ant Design — 现代化管理后台系统模板
 
-基于 React 19 + Vite 8 + Ant Design 6 的现代化管理后台系统模板，集成 Pro Components、Tailwind CSS 4、Zustand 状态管理和 React Query 数据请求。
+基于 Vite 8、React 19、Ant Design 6 的现代化管理后台系统模板。开箱即用，集成 Pro Components、Tailwind CSS 4、Zustand 状态管理、React Query 数据请求和 MSW Mock 数据层，助你快速启动中后台项目。
 
 ## 📋 目录
 
-- [技术栈](#技术栈)
-- [项目结构](#项目结构)
+- [技术栈](#-技术栈)
+- [项目结构](#-项目结构)
 - [开发脚本](#-开发脚本)
-- [快速开始](#快速开始)
-- [开发指南](#开发指南)
-- [核心功能](#核心功能)
-- [测试](#测试)
-- [构建部署](#构建部署)
-- [常见问题](#常见问题)
+- [快速开始](#-快速开始)
+- [开发指南](#-开发指南)
+- [文档索引](#-文档索引)
+- [相关链接](#-相关链接)
 
 ## 🛠 技术栈
 
-| 分类       | 技术                                                 |
-| ---------- | ---------------------------------------------------- |
-| 核心框架   | Vite 8、React 19、TypeScript ~6.0                    |
-| UI 与样式  | Ant Design 6、Pro Components、Tailwind CSS 4         |
-| 状态与数据 | Zustand 5、React Query 5、React Router 6、dayjs      |
-| 开发工具   | ESLint 10、Prettier 3、Vitest 4、Playwright、pnpm 10 |
+| 分类       | 技术                                                        |
+| ---------- | ----------------------------------------------------------- |
+| 核心框架   | Vite 8、React 19、TypeScript ~6.0                           |
+| UI 与样式  | Ant Design 6、Pro Components、Tailwind CSS 4                |
+| 状态与数据 | Zustand 5、React Query 5、React Router 6、dayjs             |
+| 开发工具   | ESLint 10、Prettier 3、Vitest 4、Playwright、pnpm 10、MSW 2 |
 
 ## 📁 项目结构
 
 ```
 vant-admin/
 ├── public/                  # 静态资源
-│   ├── favicon.svg
-│   └── icons.svg
 ├── src/
 │   ├── assets/             # 图片等静态资源
 │   ├── components/         # 公共组件
-│   ├── config/             # 配置文件
-│   │   ├── antd.tsx        # Ant Design 配置（主题、语言包）
-│   │   └── theme.ts        # 主题配置（颜色、断点、间距）
-│   ├── layouts/            # 布局组件
-│   │   └── MainLayout.tsx  # 主布局（ProLayout）
+│   ├── config/             # 配置文件（Ant Design 主题、语言包）
+│   ├── layouts/            # 布局组件（ProLayout）
+│   ├── mocks/              # MSW Mock 数据层
 │   ├── pages/              # 页面组件
-│   │   ├── Login.tsx       # 登录页
-│   │   ├── Dashboard.tsx   # 仪表盘
-│   │   └── Users.tsx       # 用户管理（ProTable 示例）
 │   ├── routes/             # 路由配置
-│   │   └── index.tsx       # 路由定义
-│   ├── services/           # API 服务
-│   │   └── queryClient.ts  # React Query 配置
-│   ├── stores/             # Zustand 状态
-│   │   └── useAppStore.ts  # 全局状态管理
-│   ├── styles/             # 全局样式
-│   │   └── index.css       # Tailwind CSS 入口
+│   ├── services/           # API 服务（React Query）
+│   ├── stores/             # 状态管理（Zustand）
+│   ├── styles/             # 全局样式（Tailwind CSS）
 │   ├── test/               # 测试配置
-│   │   └── setup.ts        # 测试环境设置
 │   ├── types/              # TypeScript 类型定义
 │   ├── utils/              # 工具函数
 │   ├── App.tsx             # 应用根组件
 │   └── main.tsx            # 应用入口
+├── docs/                   # 项目文档
 ├── e2e/                    # E2E 测试
-│   └── dashboard.spec.ts   # 端到端测试用例
-├── .vscode/                # VS Code 工作区配置
-│   └── settings.json       # 保存时自动格式化配置
-├── .gitignore
-├── .prettierrc             # Prettier 格式化规则
-├── eslint.config.js        # ESLint 配置（类型感知 + React 插件）
-├── index.html              # HTML 入口
-├── package.json
-├── playwright.config.ts    # Playwright 配置
-├── tsconfig.json           # TypeScript 配置
 ├── vite.config.ts          # Vite 配置
-└── vitest.config.ts        # Vitest 配置
+├── vitest.config.ts        # Vitest 配置
+├── tsconfig.json           # TypeScript 配置
+├── eslint.config.js        # ESLint 配置
+└── package.json
 ```
 
 ## 📜 开发脚本
@@ -79,6 +59,7 @@ vant-admin/
 | -------------------- | --------------------------------------- |
 | `pnpm dev`           | 启动开发服务器（http://localhost:5173） |
 | `pnpm build`         | TypeScript 类型检查 + 生产构建          |
+| `pnpm build:analyze` | 生产构建并生成包体积分析报告            |
 | `pnpm preview`       | 预览生产构建产物                        |
 | `pnpm lint`          | 运行 ESLint 代码检查                    |
 | `pnpm lint:fix`      | 自动修复 ESLint 可修复的问题            |
@@ -101,8 +82,7 @@ vant-admin/
 
 ```bash
 # 克隆项目
-git clone <repository-url>
-cd vant-admin
+git clone https://github.com/marinerer/vant-admin
 
 # 安装依赖（使用 pnpm）
 pnpm install
@@ -116,12 +96,7 @@ pnpm dev
 
 访问 http://localhost:5173 查看应用。
 
-### 首次使用
-
-1. 打开浏览器访问 http://localhost:5173
-2. 进入登录页面，输入任意用户名
-3. 点击 "登录" 进入管理后台
-4. 浏览 Dashboard、用户管理等页面
+> 💡 **提示**：所有 API 请求由 MSW (Mock Service Worker) 在浏览器端拦截，无需后端服务。Mock 数据定义在 `src/mocks/` 目录下，可在不依赖后端的情况下进行完整的前端开发。
 
 ## 📖 开发指南
 
@@ -131,9 +106,9 @@ pnpm dev
 
 ```tsx
 // src/pages/Settings.tsx
-import { Card, Typography } from 'antd';
+import { Card, Typography } from 'antd'
 
-const { Title } = Typography;
+const { Title } = Typography
 
 export default function Settings() {
   return (
@@ -143,14 +118,14 @@ export default function Settings() {
         <p>设置内容...</p>
       </Card>
     </div>
-  );
+  )
 }
 ```
 
 2. 在 `src/routes/index.tsx` 中添加路由：
 
 ```tsx
-import Settings from '../pages/Settings';
+import Settings from '../pages/Settings'
 
 export const router = createBrowserRouter([
   {
@@ -161,284 +136,68 @@ export const router = createBrowserRouter([
       { path: 'settings', element: <Settings /> },
     ],
   },
-]);
+])
 ```
 
 3. 在 `src/layouts/MainLayout.tsx` 中添加菜单项：
 
 ```tsx
-import { SettingOutlined } from '@ant-design/icons';
+import { SettingOutlined } from '@ant-design/icons'
 
-route={{
+route({
   path: '/',
   routes: [
     // ... 其他菜单
     { path: '/settings', name: '系统设置', icon: <SettingOutlined /> },
   ],
-}}
+})
 ```
 
 ### 使用 Zustand 状态管理
 
 ```tsx
-import { useAppStore } from '../stores/useAppStore';
+import { useAppStore } from '../stores/useAppStore'
 
 function MyComponent() {
   // 读取状态
-  const user = useAppStore((state) => state.user);
-  
+  const user = useAppStore((state) => state.user)
+
   // 使用 actions
-  const logout = useAppStore((state) => state.logout);
-  
-  return <div>{user?.name}</div>;
+  const logout = useAppStore((state) => state.logout)
+
+  return <div>{user?.name}</div>
 }
 ```
 
 ### 使用 React Query 数据请求
 
 ```tsx
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query'
+import { get } from '../utils/request'
 
 function Users() {
-  // 查询数据
   const { data, isLoading } = useQuery({
     queryKey: ['users'],
-    queryFn: () => fetch('/api/users').then(res => res.json()),
-  });
-  
-  // 修改数据
-  const mutation = useMutation({
-    mutationFn: (newUser) => fetch('/api/users', {
-      method: 'POST',
-      body: JSON.stringify(newUser),
-    }),
-  });
-  
-  if (isLoading) return <div>加载中...</div>;
-  
-  return <div>{/* 渲染数据 */}</div>;
+    queryFn: () => get('/users', { current: 1, pageSize: 10 }),
+  })
+
+  if (isLoading) return <div>加载中...</div>
+
+  return <div>{/* 渲染数据 */}</div>
 }
 ```
-
-### Tailwind CSS + Ant Design 最佳实践
-
-#### 1. 布局使用 Tailwind
-
-```tsx
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-6">
-  {/* 响应式网格布局 */}
-</div>
-```
-
-#### 2. 组件使用 Ant Design
-
-```tsx
-import { Card, Button, Table } from 'antd';
-
-<Card title="统计卡片">
-  <Table dataSource={data} columns={columns} />
-</Card>
-```
-
-#### 3. 样式覆盖规范
-
-使用 `!` 前缀覆盖 Ant Design 默认样式：
-
-```tsx
-<Title level={4} className="!mb-0 !mt-2">
-  标题
-</Title>
-```
-
-#### 4. 颜色系统
-
-参考 `src/config/theme.ts` 中的颜色映射：
-
-```tsx
-// 使用 Tailwind 颜色
-<div className="bg-blue-500 text-white">
-
-// 使用 Ant Design 颜色
-<Button type="primary">主要按钮</Button>
-```
-
-### Ant Design 组件样式修复与覆盖方案
-
-本项目同时使用 Tailwind CSS 和 Ant Design，两者可能存在样式冲突。以下是已采用的修复方案和最佳实践。
-
-#### 1. 全局兼容性层（`src/styles/index.css`）
-
-Tailwind CSS 的 Preflight 重置会破坏 Ant Design 组件的默认样式，已通过以下三层防护解决：
-
-```css
-/* ① Base 层：防止 Tailwind 重置 Ant Design 表单和按钮样式 */
-@layer base {
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
-    all: unset;
-  }
-  input, textarea, select {
-    all: revert;
-  }
-}
-
-/* ② Components 层：为 Ant Design 组件补充 Tailwind 兼容样式 */
-@layer components {
-  .ant-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-/* ③ Utilities 层：仅对非 Ant Design 元素应用 box-sizing 重置 */
-@layer utilities {
-  *:not([class^="ant-"]):not([class*=" ant-"]) {
-    box-sizing: border-box;
-  }
-}
-```
-
-**原理说明**：
-- `all: unset` 将 `<button>` 的浏览器默认样式清除，让 Ant Design 自己的样式生效
-- `all: revert` 将 `<input>` 等表单元素回退到浏览器默认，避免 Tailwind 重置导致输入框样式异常
-- `box-sizing` 选择器通过 `[class^="ant-"]` 排除所有 Ant Design 组件，避免覆盖其内部盒模型
-
-#### 2. 使用 Tailwind `!` 前缀覆盖 Ant Design 默认样式
-
-Ant Design 组件自带的 `margin` / `padding` 等间距通常通过内联样式或高优先级 CSS 设置，使用 Tailwind 的 `!important` 前缀可以可靠覆盖：
-
-```tsx
-{/* 移除 Typography 默认的上下边距 */}
-<Title level={4} className="!mb-0 !mt-1">统计数值</Title>
-
-{/* 移除标题默认底部间距 */}
-<Title level={2} className="!mb-2 !text-gray-800">页面标题</Title>
-
-{/* 调整 Button 内边距 */}
-<Button type="link" size="small" className="!px-2">获取验证码</Button>
-```
-
-> **规范**：覆盖 Ant Design 默认样式时，**必须**使用 `!` 前缀（如 `!mb-0`），否则样式可能不生效。
-
-#### 3. 通过 ConfigProvider 全局主题定制（`src/config/antd.tsx`）
-
-优先通过 `ConfigProvider` 的 `theme.token` 修改全局 Design Token，而非逐组件覆盖样式：
-
-```tsx
-<ConfigProvider
-  locale={zhCN}
-  theme={{
-    token: {
-      colorPrimary: '#1677ff',   // 主色调
-      borderRadius: 6,           // 全局圆角
-      fontSize: 14,              // 全局字号
-      lineHeight: 1.6,           // 全局行高
-    },
-    algorithm: theme.defaultAlgorithm,
-  }}
-  componentSize="middle"
->
-  {children}
-</ConfigProvider>
-```
-
-**可定制的 Token 类别**：
-- **颜色 Token**：`colorPrimary`、`colorSuccess`、`colorWarning`、`colorError` 等
-- **尺寸 Token**：`borderRadius`、`fontSize`、`controlHeight` 等
-- **间距 Token**：`margin`、`padding`、`paddingContentHorizontal` 等
-
-#### 4. 组件级主题覆盖
-
-针对单个组件定制样式，使用 `ConfigProvider` 的 `theme.components` 而非 CSS 选择器：
-
-```tsx
-<ConfigProvider
-  theme={{
-    components: {
-      Button: {
-        primaryShadow: 'none',        // 移除主按钮阴影
-        borderRadiusLG: 8,            // 大号按钮圆角
-      },
-      Card: {
-        borderRadiusLG: 12,           // 卡片圆角
-      },
-      Input: {
-        // 字体大小使用 CSS 变量，确保与框架默认一致
-        // fontSize: var(--ant-input-input-font-size)
-      },
-    },
-  }}
->
-  {children}
-</ConfigProvider>
-```
-
-#### 5. Input 组件注意事项
-
-- `addonAfter` 属性已弃用，使用 `suffix` 替代
-- 自定义字体大小时，应使用 CSS 变量 `var(--ant-input-input-font-size)` 保持与框架一致
-
-```tsx
-{/* ✅ 使用 suffix 代替 addonAfter */}
-<Input
-  prefix={<UserOutlined />}
-  suffix={<Button type="link" size="small">发送</Button>}
-/>
-```
-
-#### 6. ProLayout 图标必须传入 React 组件
-
-ProLayout 的 `icon` 属性**必须传入 React 组件**，传字符串将不显示：
-
-```tsx
-import { HomeOutlined } from '@ant-design/icons';
-
-// ✅ 正确
-{ path: '/', name: 'Dashboard', icon: <HomeOutlined /> }
-
-// ❌ 错误 — 图标不会渲染
-{ path: '/', name: 'Dashboard', icon: 'HomeOutlined' }
-```
-
-#### 7. 颜色系统映射（`src/config/theme.ts`）
-
-项目维护了一份 Ant Design Token 与 Tailwind 颜色的映射表，确保两套系统视觉一致：
-
-| Tailwind 类名     | Ant Design Token     | 色值      | 用途     |
-| ----------------- | -------------------- | --------- | -------- |
-| `bg-blue-500`     | `colorPrimary`       | `#1677ff` | 主色调   |
-| `bg-gray-100`     | `colorBgLayout`      | `#f5f5f5` | 布局背景 |
-| `text-gray-500`   | `colorTextSecondary` | `#8c8c8c` | 次要文字 |
-| `text-gray-800`   | `colorText`          | `#262626` | 主要文字 |
-| `border-gray-200` | `colorBorder`        | `#eeeeee` | 边框     |
-
-完整映射关系参见 `src/config/theme.ts`。
-
-#### 8. 常见样式问题速查
-
-| 问题                             | 原因                                 | 解决方案                                             |
-| -------------------------------- | ------------------------------------ | ---------------------------------------------------- |
-| Ant Design 按钮样式丢失          | Tailwind Preflight 重置了 `<button>` | `@layer base` 中 `all: unset`                        |
-| Input / Select 无边框            | Tailwind 重置了表单元素              | `@layer base` 中 `all: revert`                       |
-| Tailwind `mb-4` 对 AntD 组件无效 | AntD 内部样式优先级更高              | 使用 `!mb-4`（`!important`）                         |
-| 卡片圆角不统一                   | 未通过 Token 全局配置                | 在 `theme.components.Card` 中统一设置                |
-| ProLayout 图标不显示             | 传入了字符串而非组件                 | 传入 `<HomeOutlined />` 等 React 组件                |
-| 按钮内图标和文字不对齐           | `display` 不一致                     | `@layer components` 中 `.ant-btn` 设为 `inline-flex` |
 
 ### 使用 Pro Components
 
-#### ProTable 示例
-
 ```tsx
-import { ProTable } from '@ant-design/pro-components';
-import type { ProColumns } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components'
+import type { ProColumns } from '@ant-design/pro-components'
 
 const columns: ProColumns<DataType>[] = [
   {
     title: '姓名',
     dataIndex: 'name',
-    search: true, // 启用搜索
+    search: true,
   },
   {
     title: '状态',
@@ -448,346 +207,79 @@ const columns: ProColumns<DataType>[] = [
       inactive: { text: '禁用', status: 'Error' },
     },
   },
-];
+]
 
 <ProTable
   columns={columns}
-  dataSource={data}
+  request={async (params) => {
+    const data = await get('/users', params)
+    return { data: data.list, success: true, total: data.total }
+  }}
   rowKey="id"
-  toolBarRender={() => [
-    <Button type="primary">新增</Button>,
-  ]}
+  toolBarRender={() => [<Button type="primary">新增</Button>]}
 />
 ```
 
-## 🎯 核心功能
+### 使用 MSW Mock API
 
-### 1. 认证系统
+本项目集成了 MSW 实现 API Mock，开发时无需后端服务。
 
-- ✅ 登录页面（模拟认证）
-- ✅ 用户状态管理（Zustand）
-- ✅ 路由保护（可扩展）
-- ✅ 退出登录功能
+**目录结构**：
 
-### 2. 布局系统
-
-- ✅ ProLayout 高级布局
-- ✅ 响应式侧边栏
-- ✅ 顶部导航栏
-- ✅ 用户头像和菜单
-- ✅ 面包屑导航
-
-### 3. 主题配置
-
-- ✅ Ant Design 主题定制
-- ✅ 中文语言包
-- ✅ 表单验证消息中文化
-- ✅ Tailwind 颜色映射
-- ✅ 响应式断点统一
-
-### 4. 示例页面
-
-#### Dashboard（仪表盘）
-
-- 统计卡片展示
-- 快捷操作按钮
-- 响应式网格布局
-- Tailwind + Ant Design 结合示例
-
-#### Users（用户管理）
-
-- ProTable 高级表格
-- 内置搜索和筛选
-- 数据状态标签
-- 操作按钮（编辑、删除）
-- 分页功能
-
-### 5. 开发工具集成
-
-- ✅ React Compiler 性能优化
-- ✅ ESLint 代码检查（类型感知 + React-X / React-DOM 插件）
-- ✅ Prettier 代码格式化（保存时自动格式化）
-- ✅ TypeScript 类型安全
-- ✅ 热模块替换（HMR）
-
-## 🧪 测试
-
-### 单元测试
-
-```bash
-# 运行所有单元测试
-pnpm test
-
-# 运行单元测试（带 UI 界面）
-pnpm test:ui
-
-# 生成测试覆盖率报告
-pnpm test:coverage
+```
+src/mocks/
+├── data.ts              # Mock 共享数据
+├── browser.ts           # 浏览器端 Worker 启动配置
+├── node.ts              # Node 端 Server（Vitest 测试用）
+└── handlers/
+    ├── index.ts         # Handler 聚合导出
+    ├── auth.ts          # 认证 API
+    ├── users.ts         # 用户 CRUD API
+    └── dashboard.ts     # 仪表盘统计 API
 ```
 
-#### 编写测试用例
-
-```tsx
-// src/pages/Login.test.tsx
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import Login from './Login';
-
-describe('Login Component', () => {
-  it('renders login form', () => {
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>
-    );
-    expect(screen.getByText('Admin Login')).toBeInTheDocument();
-  });
-});
-```
-
-**注意事项**：
-- React Router 组件测试必须使用 `MemoryRouter` 包裹
-- jsdom 环境需要 mock `window.matchMedia`（已在 `src/test/setup.ts` 配置）
-
-### E2E 测试
-
-```bash
-# 安装 Playwright 浏览器
-pnpm exec playwright install
-
-# 运行 E2E 测试
-pnpm test:e2e
-
-# 运行 E2E 测试（带 UI 界面）
-pnpm test:e2e:ui
-```
-
-#### 编写 E2E 测试
+**添加新的 Mock API**：
 
 ```ts
-// e2e/dashboard.spec.ts
-import { test, expect } from '@playwright/test';
+// src/mocks/handlers/products.ts
+import { http, HttpResponse, delay } from 'msw'
+import { ok } from '../data'
 
-test.describe('Admin Dashboard', () => {
-  test('should login and navigate to dashboard', async ({ page }) => {
-    await page.goto('/login');
-    await page.getByPlaceholder('Enter any username').fill('testuser');
-    await page.getByRole('button', { name: 'Login' }).click();
-    
-    await expect(page.getByText('Welcome, testuser!')).toBeVisible();
-  });
-});
+export const productHandlers = [
+  http.get('/api/products', async ({ request }) => {
+    await delay(300)
+    const url = new URL(request.url)
+    const page = parseInt(url.searchParams.get('current') ?? '1', 10)
+    return HttpResponse.json(ok({ list: [], total: 0, current: page }))
+  }),
+]
 ```
 
-## 📦 构建部署
+然后在 `src/mocks/handlers/index.ts` 中注册即可。
 
-### 生产构建
+**测试中覆盖特定 handler**：
 
-```bash
-# 类型检查 + 构建
-pnpm build
+```ts
+import { server } from '../mocks/node'
+import { http, HttpResponse } from 'msw'
 
-# 预览生产构建
-pnpm preview
+server.use(
+  http.get('/api/users', () => {
+    return HttpResponse.json({ code: 0, data: { list: [], total: 0 } })
+  }),
+)
 ```
 
-构建输出位于 `dist/` 目录。
+## 📚 文档索引
 
-### 部署建议
-
-#### Vercel 部署
-
-```bash
-# 安装 Vercel CLI
-npm i -g vercel
-
-# 部署
-vercel
-```
-
-#### Nginx 配置
-
-```nginx
-server {
-    listen 80;
-    server_name your-domain.com;
-    root /path/to/dist;
-    index index.html;
-
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-}
-```
-
-#### Docker 部署
-
-```dockerfile
-FROM node:18-alpine AS builder
-WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
-RUN corepack enable && pnpm install
-COPY . .
-RUN pnpm build
-
-FROM nginx:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
-```
-
-## ❓ 常见问题
-
-### 1. Tailwind CSS 与 Ant Design 样式冲突
-
-**问题**: Tailwind 的样式重置影响了 Ant Design 组件。
-
-**解决**: 已在 `src/styles/index.css` 中配置兼容性层：
-
-```css
-@layer base {
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
-    all: unset;
-  }
-  
-  input, textarea, select {
-    all: revert;
-  }
-}
-```
-
-### 2. Pro Components 与 Ant Design 版本不匹配
-
-**警告信息**: `unmet peer dependency antd@"^4.24.15 || ^5.11.2"`
-
-**说明**: Pro Components 官方尚未完全支持 Ant Design 6，但目前基本功能正常运行。等待官方更新或使用 Ant Design 5。
-
-### 3. React Router 测试报错
-
-**错误**: `useNavigate() may be used only in the context of a <Router> component.`
-
-**解决**: 测试时使用 `MemoryRouter` 包裹：
-
-```tsx
-render(
-  <MemoryRouter>
-    <YourComponent />
-  </MemoryRouter>
-);
-```
-
-### 4. 图标不显示
-
-**确保已安装**:
-
-```bash
-pnpm add @ant-design/icons
-```
-
-**正确使用**:
-
-```tsx
-import { HomeOutlined } from '@ant-design/icons';
-
-// ✅ 正确：使用组件
-{ icon: <HomeOutlined /> }
-
-// ❌ 错误：使用字符串
-{ icon: 'HomeOutlined' }
-```
-
-### 5. 中文语言包未生效
-
-**检查配置**:
-
-```tsx
-// src/config/antd.tsx
-import zhCN from 'antd/locale/zh_CN';
-import dayjs from 'dayjs';
-import 'dayjs/locale/zh-cn';
-
-dayjs.locale('zh-cn');
-
-<ConfigProvider locale={zhCN}>
-  {/* ... */}
-</ConfigProvider>
-```
-
-### 6. 热更新不生效
-
-**重启开发服务器**:
-
-```bash
-# 停止当前服务器（Ctrl+C）
-pnpm dev
-```
-
-**清除缓存**:
-
-```bash
-rm -rf node_modules/.vite
-pnpm dev
-```
-
-## 📝 开发规范
-
-### 代码风格
-
-- 使用 TypeScript 严格模式
-- 遵循 ESLint 规则（含类型感知检查）
-- 组件使用函数式声明
-- 使用 ES Module 导入导出
-
-### 代码格式化
-
-保存文件时 VS Code 会自动运行 Prettier 格式化（已配置 `.vscode/settings.json`）。
-
-> **前提**：需安装 VS Code 扩展 [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)（`esbenp.prettier-vscode`）
-
-```bash
-# 手动检查 ESLint
-pnpm lint
-
-# 自动修复 ESLint 问题
-pnpm lint:fix
-
-# 手动格式化所有源码
-pnpm format
-```
-
-**Prettier 主要规则**（见 `.prettierrc`）：
-- 无分号（`semi: false`）
-- 单引号（`singleQuote: true`）
-- 尾逗号（`trailingComma: all`）
-- 行宽 100 字符（`printWidth: 100`）
-
-### 命名规范
-
-- **组件**: PascalCase（如 `UserList.tsx`）
-- **Hooks**: camelCase，以 `use` 开头（如 `useAppStore`）
-- **常量**: UPPER_SNAKE_CASE
-- **变量/函数**: camelCase
-- **类型/接口**: PascalCase
-
-### 目录规范
-
-- 每个功能模块独立目录
-- 组件、样式、测试文件放在一起
-- 公共组件放在 `src/components/`
-
-### Git 提交规范
-
-```
-feat: 新功能
-fix: 修复 bug
-docs: 文档更新
-style: 代码格式调整
-refactor: 重构代码
-test: 测试相关
-chore: 构建/工具链变更
-```
+| 文档                                              | 说明                                       |
+| ------------------------------------------------- | ------------------------------------------ |
+| [核心功能](./docs/core-features.md)               | 认证系统、布局、主题、示例页面、MSW Mock   |
+| [Ant Design 样式指南](./docs/antd-style-guide.md) | Tailwind + AntD 共存方案、样式修复与覆盖   |
+| [测试指南](./docs/testing.md)                     | 单元测试（Vitest）、E2E 测试（Playwright） |
+| [构建部署](./docs/deployment.md)                  | 生产构建、Vercel / Nginx / Docker 部署     |
+| [常见问题](./docs/faq.md)                         | 样式冲突、Pro Components 兼容、MSW 调试等  |
+| [开发规范](./docs/dev-standards.md)               | 代码风格、格式化、命名规范、Git 提交规范   |
 
 ## 🔗 相关链接
 
@@ -801,6 +293,7 @@ chore: 构建/工具链变更
 - [React Router](https://reactrouter.com/)
 - [Vitest 测试框架](https://vitest.dev/)
 - [Playwright E2E](https://playwright.dev/)
+- [MSW Mock Service Worker](https://mswjs.io/)
 
 ## 📄 License
 
@@ -809,4 +302,4 @@ MIT License
 ---
 
 **开发团队**: vant-admin Team  
-**最后更新**: 2026-06-01
+**最后更新**: 2026-06-03

@@ -1,19 +1,82 @@
-# Ant Design 样式指南
+# Ant Design 使用指南
 
-> Tailwind CSS 与 Ant Design 共存时的样式修复、覆盖方案和最佳实践。
+> Tailwind CSS 与 Ant Design 共存时的样式修复、覆盖方案、组件使用规范和最佳实践。
 
 ## 目录
 
-- [Tailwind + Ant Design 最佳实践](#tailwind--ant-design-最佳实践)
-- [样式修复与覆盖方案](#样式修复与覆盖方案)
-  - [1. 全局兼容性层](#1-全局兼容性层srcstylesindexcss)
-  - [2. Tailwind ! 前缀覆盖](#2-使用-tailwind--前缀覆盖-ant-design-默认样式)
-  - [3. ConfigProvider 全局主题定制](#3-通过-configprovider-全局主题定制srcconfigantdtsx)
-  - [4. 组件级主题覆盖](#4-组件级主题覆盖)
-  - [5. Input 组件注意事项](#5-input-组件注意事项)
-  - [6. ProLayout 图标规范](#6-prolayout-图标必须传入-react-组件)
-  - [7. 颜色系统映射](#7-颜色系统映射srcconfigthemets)
-  - [8. 常见样式问题速查](#8-常见样式问题速查)
+- [Ant Design 使用指南](#ant-design-使用指南)
+  - [目录](#目录)
+  - [组件使用规范](#组件使用规范)
+    - [反馈组件选择](#反馈组件选择)
+    - [表单承载方式](#表单承载方式)
+    - [加载与空状态](#加载与空状态)
+    - [组件使用要点](#组件使用要点)
+      - [Table / ProTable](#table--protable)
+      - [Form / ProForm](#form--proform)
+  - [Tailwind + Ant Design 最佳实践](#tailwind--ant-design-最佳实践)
+    - [1. 布局使用 Tailwind](#1-布局使用-tailwind)
+    - [2. 组件使用 Ant Design](#2-组件使用-ant-design)
+    - [3. 样式覆盖规范](#3-样式覆盖规范)
+    - [4. 颜色系统](#4-颜色系统)
+  - [样式修复与覆盖方案](#样式修复与覆盖方案)
+    - [1. 全局兼容性层（`src/styles/index.css`）](#1-全局兼容性层srcstylesindexcss)
+    - [2. 使用 Tailwind `!` 前缀覆盖 Ant Design 默认样式](#2-使用-tailwind--前缀覆盖-ant-design-默认样式)
+    - [3. 通过 ConfigProvider 全局主题定制（`src/config/antd.tsx`）](#3-通过-configprovider-全局主题定制srcconfigantdtsx)
+    - [4. 组件级主题覆盖](#4-组件级主题覆盖)
+    - [5. Input 组件注意事项](#5-input-组件注意事项)
+    - [6. ProLayout 图标必须传入 React 组件](#6-prolayout-图标必须传入-react-组件)
+    - [7. 颜色系统映射（`src/config/theme.ts`）](#7-颜色系统映射srcconfigthemets)
+    - [8. 常见样式问题速查](#8-常见样式问题速查)
+
+
+---
+
+
+## 组件使用规范
+
+### 反馈组件选择
+
+根据操作的严重程度和耗时，选择对应的反馈组件：
+
+| 场景         | 组件            | 说明                       |
+| ------------ | --------------- | -------------------------- |
+| 即时反馈     | `message`       | 成功/失败提示，3秒自动消失 |
+| 后台任务完成 | `notification`  | 需用户知晓但不打断操作     |
+| 复杂操作结果 | `Result`        | 独立页面展示最终结果       |
+| 轻量危险操作 | `Popconfirm`    | 单行数据删除等             |
+| 重度确认操作 | `Modal.confirm` | 批量删除、不可逆操作       |
+
+### 表单承载方式
+
+根据字段数量选择合适的承载方式：
+
+- **≤5 字段**：使用 `Modal`（重命名、简单配置）
+- **6~12 字段**：使用 `Drawer`（详情编辑、中等复杂度）
+- **>12 字段**：使用独立页面（复杂配置、文章发布）
+
+> **状态清理**：Modal/Drawer 必须使用 `destroyOnClose` 或受控 `open` 配合 `form.resetFields()`，防止脏数据残留。
+
+### 加载与空状态
+
+- **首次加载**：优先使用 `Skeleton`（骨架屏）替代 `Spin`，减少白屏闪烁感
+- **局部加载**：使用组件自带 `loading` 属性，禁止全屏遮挡
+- **防抖处理**：搜索框必须使用 `debounce` (300-500ms)
+- **防重复点击**：提交按钮必须立即设置 `loading={true}`
+- **空状态**：必须使用 `Empty` 组件并提供引导操作
+
+### 组件使用要点
+
+#### Table / ProTable
+
+- 必须指定 `rowKey` 属性
+- 大数据量使用 `scroll={{ x: 'max-content' }}` 或虚拟滚动
+- 优先使用 `ProTable` 替代原生 `Table`
+
+#### Form / ProForm
+
+- 优先使用 `ProForm` / `ModalForm` / `DrawerForm`
+- 复杂联动使用 `Form.useWatch` 替代 `onValuesChange`
+- 提交按钮必须绑定 `htmlType="submit"`
 
 ---
 
